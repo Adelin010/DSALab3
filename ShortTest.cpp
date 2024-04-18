@@ -21,9 +21,12 @@ void testAll() {
     // assert(list.search(2) == 1);
     // assert(list.search(4) == 0);
     
-    for(int i = 1; i <= 201; ++i){
+    for(int i = 1; i <= 8; ++i){
         list.addToEnd(i);
     }
+
+
+    list.addToPosition(4, 3000);
 
     cout << list.search(201);
 

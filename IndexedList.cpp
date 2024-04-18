@@ -123,6 +123,66 @@ void IndexedList::addToEnd(TElem e) {
 
 void IndexedList::addToPosition(int pos, TElem e) {
     //TODO - Implementation
+
+    if(pos == this->listSize+1){
+        this->addToEnd(e);
+        return;
+    }
+    if(pos > this->listSize+1){
+        //eroare
+        return;
+    }
+    //resize
+    if(this->listSize >= this->capacity-1){
+        int newCap = this->capacity * 2;
+        DLLANode* newArr = new DLLANode[newCap];
+        //copy the old nodes
+        for(int i = 0; i < this->capacity;++i){
+            newArr[i].info = this->nodes[i].info;
+            newArr[i].next = this->nodes[i].next;
+            newArr[i].prev = this->nodes[i].prev;
+        }
+        //init the new part added
+        for(int i = this->capacity; i < newCap; ++i){
+            newArr[i].next = i+1;
+            newArr[i].prev = i-1;
+            newArr[i].info = 0;
+        }
+        //the last next must be -1
+        this->firstEmpty = this->capacity;
+        this->capacity = newCap;
+        delete[] this->nodes;
+        this->nodes = newArr;
+    }
+
+    //find the place where to add
+    //Insert in the head place
+    if(pos == 1){
+        int where = this->firstEmpty;
+        this->firstEmpty = this->nodes[this->firstEmpty].next;
+        this->nodes[where].info = e;
+        this->nodes[where].next = this->head;
+        this->nodes[where].prev = -1;
+        this->nodes[this->head].prev = where;
+        this->head = where;
+        this->listSize++;
+        return;
+    }
+    int index = this->head;
+    for(int i = 2; i <= pos; ++i){
+        index = this->nodes[index].next;
+    }
+    int where = this->firstEmpty;
+    this->firstEmpty = this->nodes[where].next;
+    this->nodes[where].info = e;
+
+    int ante = this->nodes[index].prev;
+
+    this->nodes[ante].next = where;
+    this->nodes[where].prev = ante;
+    this->nodes[index].prev = where;
+    this->nodes[where].next = index;
+    this->listSize++;
 }
 
 TElem IndexedList::remove(int pos) {
