@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ShortTest.h"
 #include "ExtendedTest.h"
+#include "IndexedList.h"
 
 using namespace std;
 

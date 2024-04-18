@@ -16,12 +16,14 @@ class DLLANode {
 
         DLLANode(int info, int next, int prev);
 
+        void operator= (DLLANode const& second) ;
+
 
 };
 class IndexedList {
 private:
 	//TODO - Representation
-	DLLANode** nodes;
+	DLLANode* nodes;
     int capacity;
     int head;
     int tail;
@@ -32,6 +34,9 @@ private:
 public:
     // constructor
     IndexedList ();
+
+    //Utilitz function
+    void set(int pos, TElem info, int next, int prev);
 
     // returns the number of elements from the list
     int size() const;

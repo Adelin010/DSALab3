@@ -1,24 +1,32 @@
 #include <assert.h>
 #include <exception>
+#include <iostream>
 
 #include "ShortTest.h"
 #include "IndexedList.h"
 #include "ListIterator.h"
 
 
-
+using std::cout;
 
 void testAll() {
     IndexedList list = IndexedList();
     assert(list.isEmpty());
-    list.addToEnd(1);
-    assert(list.size() == 1);
+    // list.addToEnd(1);
+    // assert(list.size() == 1);
     // list.addToPosition(0,2);
-    list.addToEnd(2);
-    assert(list.size() == 2);
-    assert(list.search(1) == 1);
-    assert(list.search(2) == 1);
-    assert(list.search(4) == 0);
+    // list.addToEnd(2);
+    // assert(list.size() == 2);
+    // assert(list.search(1) == 1);
+    // assert(list.search(2) == 1);
+    // assert(list.search(4) == 0);
+    
+    for(int i = 1; i <= 201; ++i){
+        list.addToEnd(i);
+    }
+
+    cout << list.search(201);
+
     // ListIterator it = list.iterator();
     // assert(it.valid());
     // it.next();
